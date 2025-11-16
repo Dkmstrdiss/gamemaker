@@ -1,20 +1,28 @@
 function Lecteur_carte() {
-    var file = file_text_open_read("Liste_Carte.csv");
+    var file_path = "Liste_Carte.csv";
+    if (!file_exists(file_path)) {
+        show_debug_message("[Lecteur_carte] Fichier introuvable : " + file_path);
+        return;
+    }
 
-    // skip header
+    var file = file_text_open_read(file_path);
+
+    // Ignorer l'en-tête
     file_text_read_string(file);
     file_text_readln(file);
 
     global.card_db = [];
 
-    function parse_int(val) {
+    var parse_int = function (val) {
         val = string_trim(val);
         return (string_digits(val) != "") ? round(real(val)) : 0;
-    }
+    };
 
     while (!file_text_eof(file)) {
         var line = file_text_read_string(file);
         file_text_readln(file);
+
+        if (string_length(string_trim(line)) == 0) continue;
 
         var fields = [];
         while (true) {
@@ -27,98 +35,103 @@ function Lecteur_carte() {
         }
 
         if (array_length(fields) >= 11) {
-
-            var card_id = parse_int(fields[0]);
-            var name        = fields[1];
-            var type_str    = fields[2];
-            var archetype   = fields[3];
-            var att         = parse_int(fields[4]);
-            var def         = parse_int(fields[5]);
-            var prd         = parse_int(fields[6]);
-            var effect_id   = fields[7];
-            var desc        = fields[8];
-            var is_leg      = (parse_int(fields[9]) != 0);
-            var is_tok      = (parse_int(fields[10]) != 0);
+            var card_id    = parse_int(fields[0]);
+            var name       = fields[1];
+            var type_str   = fields[2];
+            var archetype  = fields[3];
+            var att        = parse_int(fields[4]);
+            var def        = parse_int(fields[5]);
+            var prd        = parse_int(fields[6]);
+            var effect_id  = fields[7];
+            var desc       = fields[8];
+            var is_leg     = (parse_int(fields[9]) != 0);
+            var is_tok     = (parse_int(fields[10]) != 0);
 
             var type_enum;
             switch (type_str) {
                 case "Creature": type_enum = CardType.Creature; break;
                 case "Action":   type_enum = CardType.Action;   break;
                 case "Fusion":   type_enum = CardType.Fusion;   break;
-                default:         type_enum = CardType.Action;   break;
+                default:          type_enum = CardType.Action;   break;
             }
 
-            global.card_db[id] = {
-                id          : id,
-                name        : name,
-                type        : type_enum,
-                archetype   : archetype,
-                att_base    : att,
-                def_base    : def,
-                prd_base    : prd,
-                is_legendary: is_leg,
-                is_token    : is_tok,
-                effect_id   : effect_id,
-                description : desc
+            var template = {
+                id           : card_id,
+                card_id      : card_id,
+                Carte_id     : card_id,
+                Name         : name,
+                Genre        : type_str,
+                Type         : type_enum,
+                Archetype    : archetype,
+                Att          : att,
+                Def          : def,
+                Prod         : prd,
+                EffectId     : effect_id,
+                Description  : desc,
+                IsLegendary  : is_leg,
+                IsToken      : is_tok,
+                Doublon      : 0
             };
+
+            global.card_db[card_id] = template;
         }
     }
 
     file_text_close(file);
+
+    global.Listo = global.card_db;
 }
 
 function Lecteur_Slot(Slot_id){
-		// --- Lecture du fichier du slot courant ---
-		var file_name = "save_slot_" + string(Slot_id) + ".txt";
+    var file_name = "save_slot_" + string(Slot_id) + ".txt";
 
-		if (file_exists(file_name)) {
-		    var file = file_text_open_read(file_name);
+    if (file_exists(file_name)) {
+        var file = file_text_open_read(file_name);
+        var list_deck = ds_list_create();
 
-		    var list_deck = ds_list_create(); // <- deck du slot (ds_list de struct)
+        var deck_name = file_text_readln(file);
+        variable_global_set("deck_name_" + string(Slot_id), deck_name);
 
-		    // 1re ligne : nom du deck
-		    var deck_name = file_text_readln(file);
-		    if (Slot_id == 1) global.deck_name_1 = deck_name;
-		    if (Slot_id == 2) global.deck_name_2 = deck_name;
-		    if (Slot_id == 3) global.deck_name_3 = deck_name;
+        while (!file_text_eof(file)) {
+            var line = file_text_readln(file);
+            var parts = string_split(line, ",");
+            if (array_length(parts) != 2) continue;
 
-		    // Lecture des lignes suivantes : id,qty
-		    while (!file_text_eof(file)) {
-		        var line = file_text_readln(file);
-		        var parts = string_split(line, ",");
+            var cardid = round(real(string_trim(parts[0])));
+            var qty    = round(real(string_trim(parts[1])));
 
-		        if (array_length(parts) == 2) {
-		            var cardid = real(string_trim(parts[0]));
-		            var qty = real(string_trim(parts[1]));
+            var template = undefined;
+            if (is_array(global.card_db) && cardid >= 0 && cardid < array_length(global.card_db)) {
+                template = global.card_db[cardid];
+            }
 
-		            // Recherche dans global.Listz (ds_list)
-		            for (var j = 0; j < ds_list_size(global.Listz); j++) {
-		                var card = global.Listz[| j];
-		                if (floor(card.Carte_id) == cardid) {
-					
-		                    var entry = {
-		                        Carte_id: card.Carte_id,
-		                        Genre: card.Genre,
-		                        Doublon: qty,
-		                        Carte_info: card
-		                    };
-		                    ds_list_add(list_deck, entry);
-		                    break;
-		                }
-		            }
-		        }
-		    }
+            if (is_struct(template)) {
+                var entry = {
+                    Carte_id : template.Carte_id,
+                    Genre    : template.Genre,
+                    Doublon  : qty,
+                    Carte_info: template
+                };
+                ds_list_add(list_deck, entry);
+            } else {
+                show_debug_message("[Lecteur_Slot] Carte introuvable (id=" + string(cardid) + ")");
+            }
+        }
 
-		    file_text_close(file);
+        file_text_close(file);
 
-		    // Stocker le deck dans une variable globale dynamique
-		    variable_global_set("deck__slot_" + string(Slot_id), list_deck);
+        variable_global_set("deck__slot_" + string(Slot_id), list_deck);
 
-		    // Marquage du slot comme utilisé
-		    global.slot_list[Slot_id - 1].image_index = 2;
-		    global.slot_list[Slot_id - 1].is_used = true;
-		} else {
-		    global.slot_list[Slot_id - 1].image_index = 0;
-		    global.slot_list[Slot_id - 1].is_used = false;
-		}
+        if (is_array(global.slot_list) && Slot_id - 1 < array_length(global.slot_list)) {
+            global.slot_list[Slot_id - 1].image_index = 2;
+            global.slot_list[Slot_id - 1].is_used = true;
+        }
+    } else {
+        variable_global_set("deck__slot_" + string(Slot_id), ds_list_create());
+
+        if (is_array(global.slot_list) && Slot_id - 1 < array_length(global.slot_list)) {
+            global.slot_list[Slot_id - 1].image_index = 0;
+            global.slot_list[Slot_id - 1].is_used = false;
+        }
+    }
 }

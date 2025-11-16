@@ -79,7 +79,7 @@ function Refresh_Search_Page (Lista) {
             // Cas où l'entrée est un simple id numérique
             Carte_id = entry;
 
-            // À adapter si tes templates sont dans global.Listz au lieu de global.card_db
+            // Les templates sont chargés par Lecteur_carte dans global.card_db
             card = global.card_db[Carte_id];
             if (!is_struct(card)) {
                 show_debug_message("Refresh_Search_Page: card_db[" + string(Carte_id) + "] invalide");
