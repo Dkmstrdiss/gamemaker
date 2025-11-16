@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"sSearch_Page",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"sSearch_Page",
+  "parent":{
+    "name":"Builder",
+    "path":"folders/Scripts/Builder.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

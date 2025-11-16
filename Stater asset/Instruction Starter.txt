@@ -1,0 +1,14 @@
+Pas d'importance logiciel.
+Tu as carte libre de ce côté.
+
+Objectif : fournir tous les éléments nécessaires à la création d’un écran de présentation animé qui précède le menu principal du jeu de cartes.
+
+Il me faut :
+
+Composition visuelle (schéma simplifié)
+Fournir les assets.
+Répertorier leur position (screenshot).
+
+Instructions d’animation
+La trajectoire des assets mobiles, position de départ et d’arrivée.
+Le comportement des assets fixes.

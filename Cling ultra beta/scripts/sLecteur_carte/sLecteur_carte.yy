@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"sLecteur_carte",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"sLecteur_carte",
+  "parent":{
+    "name":"Builder",
+    "path":"folders/Scripts/Builder.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

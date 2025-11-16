@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"sGet_GenreList",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"sGet_GenreList",
+  "parent":{
+    "name":"Builder",
+    "path":"folders/Scripts/Builder.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

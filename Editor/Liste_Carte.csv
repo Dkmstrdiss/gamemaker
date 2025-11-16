@@ -1,0 +1,57 @@
+[ID],[Nom],[Genre],[Archétype],[ATT],[DEF],[PRD],[EFFET],[Description]
+[1],[C'est notre planète  1#],[Action],[No],[No],[No],[no],[Annule les futurs dégâts pendant un tour],"[Tu n'es qu'un parasite Lavos , c'est la planète de tout les être vivants]"
+[2],[La tour des mauvaises suprises 2#],[Action],[No],[No],[No],[no],[Cette carte permet de changer la position d'une carte adverse ],"[Avant cette tour à la con, je passais un bon moment …]"
+[3],[Donnes-moi tes saucisses 3# ],[Action],[No],[No],[No],[no],[Inverse les stat de défense et d'attaque],[Il faudrait un jour apprendre à lire l'heure correctement]
+[4],[12h30 EVE 8#],[Action],[No],[No],[No],[no],[Vous devez bannir une carte pour pouvoir piocher une carte ],"[On a fait 15 fois ce combat , est-ce que tu vas comprendre ?]"
+[5],[Dunk les gros bras  5#],[Créature ],[Tendote],[3],[1],[0],[l'attaquer Traverse la défense de l'ennemie et tape directement les points avec la différence ATT et DEF ],[ je fais peut être 3 cm mais ça va pas m'empêcher de t'atomiser]
+[6],[Chat idiot 6#],[Créature ],[Bestiole],[1],[2],[1],"[Quand cette carte meurt sur le terrain, elle bannit la prochaine carte du deck ennemie ]",[Miaou! Miaou ! MIAOU !]
+[7],[Gadwin Architecte français 7 #],[Créature ],[Grandiéen],[2],[3],[0],[PE  (pas effet)],[voila ce qui ce passe quand on fait appelle à des architectes chinois… Construisez Français bordel ! ]
+[8],[Principauté de Monaco   ???#],[Action],[no],[ ],[ ],[ ],[????],[ ]
+[9],[Rololo Panilolo  9#],[Créature ],[Cristalien],[2],[0],[0],[à son apparition vous révéler 2 cartes de votre adversaire],"[dans ce shooting, pas besoin de sous-vêtement…]"
+[10],[Fraternité  10#],[Action],[ ],[ ],[ ],[ ],[ +1 Def pour toute les créatures en réserve conditon il faut plus d'une créature],"[Qu'importe d’où venez, nous sommes potos ici ]"
+[11],[Link l'immuable  12#],[Créature ],[Tendote],[4],[0],[3],"[Si cette carte ne détruit pas un monstre pendant sa phase d'attaque, elle doit passer automatiquement en mode défense (S'il n'a aucune place de disponible sur la ligne défensive la carte est détruit et vous perdez 1 Pv)]","[Finir BOTW sans se faire toucher une seule fois, ce fut long""]"
+[12],[Le sommeil d'EZDM  14#],[Action],[ ],[ ],[ ],[ ],"[Annule les effets d'une créature pendant 3 tours mais restaure la vie de l'adversaire de 1 Pv par tour reste active sur votre terrain tant que la créature est vivante, lorsque celle-ci meurt ou que l'effet prend fin cette carte est bannie]",[Parfois les gens vous demandent avec ferveur quelque chose mais s'endorme au moment venus]
+[13],[Parek 13#],[Créature ],[Tendote],[1],[3],[0],[PE  (pas effet)],[il est pas vert mais il a des cheveux étincelant]
+[14],[Parade Canine  33#],[Action],[ ],[ ],[ ],[ ],[Contre une carte action et bannie celle-ci cependant vous perdez 1 PV],[Je suis un dieu pourtant comment est-ce que cela est possible]
+[15],[Bridget l'intrépide 15#],[Créature ],[Coupable],[2],[4],[0],"[Quand cette carte survie à un combat, elle change de posture]","[faire du vélo c'est fun, ça change de casser des tronches]"
+[16],[On partage la mise 16 #],[Action],[ ],[ ],[ ],[ ],[Vous obligez votre adversaire et vous-même à rendre inutilisable un emplacement de créature et d'action pendant 3 tour (durant ces trois tours cette carte reste active sur la colonne action],"[Partagez ces 50 centimes avec moi , monsieur Dectektive]"
+[17],[Épaular (Légendaire) 17#],[Créature ],[Cristalien],[4],[2],[2],[PE  (pas effet)],[Zébulon nous n'avons pas le temps aujourd'hui pour une aventure homosexuelle]
+[18],[la cage de Raging Coeurl  35#],[Action],[ ],[ ],[ ],[ ],"[Obliges deux créatures à rentrer en conflit , hors de la battlephase]",[Ramenez vous pour le duel de votre vie !]
+[19],[Femme au foyer n°1   19#],[Créature ],[Boulanéen],[2],[1],[1],"[ Si cette carte est accompagnée sur le terrain de son homologue ""femme au foyer n°2"", elle permet une invocation spéciale ]",[Elon musk c'est un petit zizi face à Capsule Corp et j'ai le temps d'élever mon gosse]
+[20],[Une pression un peu énorme 20#],[Action],[ ],[ ],[ ],[ ],[Réduit la défense de 1 et la parade de 1 d'une créature ],"[ramènes-toi gros tétons , jai pas peur ! ]"
+[21],[Maqué mariage lunaire 21#],[Action],[ ],[ ],[ ],[ ],"[Donne 1 ATK à deux créatures si une des cartes sélectionnés est détruite, elle entraîne la destruction de son partenaire]","[Maqué peachounette , ça va être ta péter]"
+[22],[Prière au-delà des dimensions  22#],[Action],[ ],[ ],[ ],[ ],[Ramène deux cartes du cimetière aléatoire au dessus de votre Deck],"[On a 10ans et on affronte une entité cosmique , juste un petit coup de main SVP]"
+[23],[Poulpinus 23#],[Créature ],[Cristalien],[3],[2],[2],[PE  (pas effet)],"[Tu sais Mikuelito , si tu réussi à me vaincre , je serai avec toi pour la vie]"
+[24],[Simp Zagreus  24#],[Créature ],[Rogueguy],[3],[1],[0],[PE  (pas effet)],"[megaera .. Ma reine , je t'ai ramené un présent]"
+[25],[La switch de Justin 25#],[Action],[ ],[ ],[ ],[ ],"[Vous permet de piocher la prochaine créature du même archétype qu'une créature sur le terrain après avoir sélectionner la créature, vous devez mélanger votre deck]","[Regarde Feena, j'ai enfin retrouver ma switch , on fait une partie !?]"
+[26],[Haureblond 26#],[Créature ],[Cristalien],[3],[2],[3],[Gagne +1 sur chaque stat en présence de la carte Balett],[Il est écrit quoi là ? A V E U R L ?]
+[27],[Roi Morshu  30#],[Créature ],[Tendote],[2],[3],[0],[PE  (pas effet)],"[Gagner le cœur d'un public pendant un tournoi , c'est facile mon pote]"
+[28],[Balett 28#],[Créature ],[Cristalien],[3],[3],[0],[Gagne +1 sur chaque stat en présence de la carte d'Haureblond],[SALOPERIE DE SHINRA]
+[29],[Direction CRISTARIUUUUM 29#],[Action],[ ],[ ],[ ],[ ],[Bannie une carte et 1 PV pour vous permettre d'invoquer une créature supplémentaire nécessitant aucune invocation spéciale ],[CRISTARIUUUUUMMMMM]
+[30],[Bouge ton fiak mon p'tit varek 57#],[Action],[ ],[ ],[ ],[ ],[Vous sélectionnez une carte chacun une créature qui seront immobilisés pendant 1 tour],"[Allez suis mon rythme , ton cul de droite à gauche !]"
+[31],[Varek Eight 31#],[Créature ],[Ruestalien],[3],[1],[0],"[""Fiak d'acier""  si subit une attaque réduit l'attaque de son opposant de 1]",[J'ai axé 85% de mes entraînments à mon cul]
+[32],[Léon & Moushley 32#],[Créature ],[Racoumoisin],[2],[2],[0],[Peut attaquer deux fois],[qui est entrain de crier comme ça Moushley !?]
+[33],[La planche à plume 60#],[Action ],[ ],[ ],[ ],[ ],[???],[???]
+[34],[Joyeux repos   34#],[Action],[ ],[ ],[ ],[ ],"[Vous ne pouvez ni être attaquer, ni attaquer votre durant  tours]",[Tu es un véritable ami MisterMiaou]
+[35],[Coincer sur le trône 58#],[Action],[ ],[ ],[ ],[ ],[Vous exposez un monstre défensif en mode attaque ],[Le repos du brave jusqu'à …]
+[36],[Dis-moi ou est l'or du capitaine 36#],[Action],[ ],[ ],[ ],[ ],[Pile ou face si tu as bon tu pioches une carte sinon l'adversaire pioche une carte],[DIS MOI OU EST L'OR DU CAPITAINE !  COT COT]
+[37],[Raiden le lecteur assidu 37#],[Créature ],[Solidien],[2],[3],[3],[Quand cette carte est posée permet de visualiser deux cartes et ensuite vous choissez une carte à bloquer pendant 1 tour],[Personne n'aura mon putain de magazine mec !]
+[38],[Sushi adventure & Danzo  (légendaire) 38#],[Créature ],[Galienetain],[4],[3],[3],"[Ignore la PRD de son opposant une fois uniquement, ajoute un tokken ""Danzo"" 1ATT 1 DEF , attaque et défend avec lui mais ne peut pas attaquer seul ou défendre seul. Attaque toujours après Sushi et défend toujours avant celui-ci]",[TU TE CALMES ! ]
+[39],[Chemin dissimulé 39#],[Action],[ ],[ ],[ ],[ ],[Va chercher la prochaine carte action de votre deck et après mélangez-le],"[Si miku n'avait rien révéler , il ne l'aurait jamais su !]"
+[40],[Sekidlow (Légendaire) 40#],[Créature ],[Ashinéen],[4],[1],[5],[Ne subit pas d'épuissement une seule fois],[Kuro tu te déplaces comme si tu avais 70ans]
+[41],[Jessie  ! 41#],[Créature ],[Cristalien],[2],[3],[2],[Ajoute trois ordinateurs cassés dans le deck de votre adversaire et vous mélangez son jeu],"[ORDINATEUR"" *se tient la tête* ]"
+[42],[Fourneau à pizza 42#],[Créature ],[Tendote],[0],[2],[2],"[Si vous avez moins de 3 PV, vous récupérez 1 PV par tour tant que cette carte est active]",[Me cuire une pizza est un objectif bien plus primordiale que d'atomiser un con]
+[43],[Glissade 43#],[Action],[ ],[ ],[ ],[ ],[Pour activer son effet vous bannissez une carte pour bannir une carte de votre adversaire dans sa main et de son cimetière],[alors vous devez vous mettre au..  ! PAS COMME ça EZDM !]
+[44],[Shizuka (Légendaire) 44#],[Créature ],[Netien],[4],[2],[4],"[Si votre adversaire active deux cartes action durant son tour (même en continue ) , cette carte peut être invoquer gratuitement depuis votre main et ne nécessite aucun sacrifice]","[Tais-toi, Tout ce que tu devrais faire, c'est disparaître]"
+[45],[Gâchette 45#],[Action],[ ],[ ],[ ],[ ],"[Équipement pour Épaular puissance +1, lance Renzokuken : bannissez autant de créature en main que vous voulez pour autant d'attaques supplémentaire (égale -2 de l'ATT de la créature). Lancez un pile (touché) ou face (raté ) pour la réussite de l'attaque]",[ ]
+[46],[Pooppetos Prince des Kazogiens 46#],[Créature ],[Boulanéen],[3],[2],[1],[Si pooppetos meurt au combat emmène son adversaire avec lui au cimetière],"[On t'a rien demander face de cul , Dégage !]"
+[47],[Lame de la mort 47#],[Action],[ ],[ ],[ ],[ ],"[Utilisable uniquement Sekidlow, Détruit tous les monstres de l'adversaire mais descend vos point de vie à 1 et réduit la parade de sekiro à 1 de manière permanente]",[Enfin un truc qui permet de tuer des trucs qui veulent pas mourir]
+[48],[Soleil Good Dude48#],[Créature ],[Coupable],[3],[3],[2],[PE],[je suis en vacance et j'ai toujours mal au cou]
+[49],[L'ultime femme au foyer (Légendaire)49#],[Fusion],[Boulanéen],[5],[2],[2],"[Si cette créature est détruite , elle se divise en deux créatures , mais leur est désactiver ]","[Pardonnez moi Toriyama-Sensei, mais ça passe il existe des Gokutacos au Méxique , j'ai le droit !]"
+[50],[Gina boxeuse du Siam 50#],[Créature ],[Cinéastein],[1],[2],[1],[à chaque début de phase de combat elle gagne +1 ATTK],"[""Je vais purger l'Italie des enfoirés , viens là Mussolini !"" ]"
+[51],[Femme au foyer n°2 27#],[Créature ],[Boulanéen],[2],[1],[1],"[Si cette carte est accompagné sur le terrain de son homologue femme au foyer n°1, elle permet une invocation spéciale ]",[J'ai sacrifié ma vie pour que Gohan étudie les fourmis Super saiyen !]
+[52],[réveilles-toi mon amour 51#],[action ],[ ],[ ],[ ],[ ],[Renvoie  ],[ ]
+[53],[Kékosse de la plage 52  #],[action ],[ ],[ ],[ ],[ ],"[Cible  une créature adverse et lui provoque essouflement , si la carte est ciblé  est essouflé , elle est détruite]",[ ]
+[54],[Brothaa  53 #],[action],[ ],[ ],[ ],[ ],"[si deux monstre de ta ligne d'attaque sont actif peuvent lancer une attaque synchronisée ,ne peux pas excéder 5 points de dégâts , ne peut être activer seulement quand les deux monstres n'ont pas attaquer pendant la battle phase après avoir attaquer les deux monstres subissent essouflement ]",[ ]
+[55],[Fais-moi l'amour  54  #],[action ],[ ],[ ],[ ],[ ],"[charme une carte et la fait changer de position  pendant 2tour , cette carte contrôlé ne pas être détruite pendant votre contrôle après deux tour retourne à son propriétaire ]",[ ]
+[56],[pouchtronoux 55 #],[Créature ],[ ],[5],[0],[1],[alcoolisme : perd -1 de stat générale chaque end phase ],[ferme-là saloprie de Lézard!]

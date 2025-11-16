@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"SaveBtn",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"SaveBtn",
+  "parent":{
+    "name":"Builder",
+    "path":"folders/Scripts/Builder.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"LikeManager",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"LikeManager",
+  "parent":{
+    "name":"Builder",
+    "path":"folders/Scripts/Builder.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
