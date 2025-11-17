@@ -1,5 +1,11 @@
 function SaveData(slot_id) {
-		var filename = "save_slot_" + string(slot_id) + ".txt";
+                var save_dir = "Save data";
+
+                if (!directory_exists(save_dir)) {
+                    directory_create(save_dir);
+                }
+
+                var filename = save_dir + "/save_slot_" + string(slot_id) + ".txt";
 
 		if (file_exists(filename)) {
 		    file_delete(filename);

@@ -55,3 +55,5 @@
 [54],[Brothaa  53 #],[action],[ ],[ ],[ ],[ ],"[si deux monstre de ta ligne d'attaque sont actif peuvent lancer une attaque synchronisée ,ne peux pas excéder 5 points de dégâts , ne peut être activer seulement quand les deux monstres n'ont pas attaquer pendant la battle phase après avoir attaquer les deux monstres subissent essouflement ]",[ ]
 [55],[Fais-moi l'amour  54  #],[action ],[ ],[ ],[ ],[ ],"[charme une carte et la fait changer de position  pendant 2tour , cette carte contrôlé ne pas être détruite pendant votre contrôle après deux tour retourne à son propriétaire ]",[ ]
 [56],[pouchtronoux 55 #],[Créature ],[ ],[5],[0],[1],[alcoolisme : perd -1 de stat générale chaque end phase ],[ferme-là saloprie de Lézard!]
+[57],[Entraînement quotidien 61 #],[Action],[ ],[ ],[ ],[ ],[nan],[nan]
+[58],[L'aura de Dojima  62 #],[Créature ],[Cristalien],[ ],[ ],[ ],[nan],[nan]

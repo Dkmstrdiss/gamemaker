@@ -83,7 +83,13 @@ function Lecteur_carte() {
 }
 
 function Lecteur_Slot(Slot_id){
-    var file_name = "save_slot_" + string(Slot_id) + ".txt";
+    var save_dir = "Save data";
+
+    if (!directory_exists(save_dir)) {
+        directory_create(save_dir);
+    }
+
+    var file_name = save_dir + "/save_slot_" + string(Slot_id) + ".txt";
 
     if (file_exists(file_name)) {
         var file = file_text_open_read(file_name);
