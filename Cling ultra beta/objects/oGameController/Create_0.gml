@@ -22,6 +22,7 @@ phase_wheel_target   = 0;
 current_phase_index  = 0;
 current_phase        = phase_sequence[current_phase_index];
 phase_timer          = 0;
+mulligan_phase_active = false;
 
 // Roue de phases (UI)
 phase_wheel_segments = [Phase.Draw, Phase.Main, Phase.Attack, Phase.Defense, Phase.Resolution];
@@ -55,59 +56,7 @@ get_player = function (_id) {
 };
 
 build_deck_from_source = function (_deck_source, _label) {
-    var built = ds_list_create();
-
-    var add_card = function (_card_info, _copies) {
-        if (!is_struct(_card_info)) return;
-        var copies = max(1, _copies);
-        for (var c = 0; c < copies; ++c) {
-            ds_list_add(built, _card_info);
-        }
-    };
-
-    if (ds_exists(_deck_source, ds_type_list)) {
-        for (var i = 0; i < ds_list_size(_deck_source); ++i) {
-            var entry     = _deck_source[| i];
-            var copies    = (is_struct(entry) && variable_struct_exists(entry, "Doublon")) ? entry.Doublon : 1;
-            var card_info = (is_struct(entry) && variable_struct_exists(entry, "Carte_info")) ? entry.Carte_info : entry;
-            add_card(card_info, copies);
-        }
-    } else if (is_array(_deck_source)) {
-        for (var j = 0; j < array_length(_deck_source); ++j) {
-            var arr_entry = _deck_source[j];
-            add_card(arr_entry, 1);
-        }
-    }
-
-    // Fallback : piocher quelques cartes depuis la base si le deck est vide
-    if (ds_list_size(built) == 0 && is_array(global.card_db)) {
-        for (var k = 0; k < array_length(global.card_db); ++k) {
-            var template = global.card_db[k];
-            if (is_struct(template)) {
-                ds_list_add(built, template);
-            }
-            if (ds_list_size(built) >= 20) break;
-        }
-    }
-
-    // Fallback ultime : deck de placeholders pour éviter les plantages
-    if (ds_list_size(built) == 0) {
-        var placeholder = {
-            card_id    : -1,
-            Name       : "Placeholder",
-            Type       : CardType.Creature,
-            Att        : 1,
-            Def        : 1,
-            Prod       : 0,
-            Description: "Deck par défaut (aucune carte trouvée)",
-            IsLegendary: false,
-            IsToken    : false
-        };
-        repeat (20) ds_list_add(built, placeholder);
-    }
-
-    ds_list_shuffle(built);
-    return built;
+    return sDeckBuilder(_deck_source, _label);
 };
 
 draw_card = function (_player) {
@@ -150,7 +99,21 @@ perform_mulligan = function (_player) {
     ds_list_shuffle(_player.deck);
     var drawn = draw_cards(_player, hand_size);
     _player.mulligan_used = true;
+    _player.starting_hand_size = drawn;
     return drawn;
+};
+
+open_mulligan_window = function () {
+    mulligan_phase_active = true;
+    auto_advance_phases   = false;
+};
+
+close_mulligan_window = function () {
+    player_a.mulligan_available = false;
+    player_b.mulligan_available = false;
+    mulligan_phase_active       = false;
+    auto_advance_phases         = true;
+    start_turn(turn_player_id);
 };
 
 phase_duration = function (_phase) {
@@ -212,7 +175,5 @@ player_b.deck = build_deck_from_source(opps_deck_source, "PlayerB");
 setup_starting_hand(player_a);
 setup_starting_hand(player_b);
 
-// Par défaut, on enchaîne directement sur le premier tour
-player_a.mulligan_available = false;
-player_b.mulligan_available = false;
-start_turn(turn_player_id);
+// Ouvre une fenêtre de mulligan avant le premier tour
+open_mulligan_window();
