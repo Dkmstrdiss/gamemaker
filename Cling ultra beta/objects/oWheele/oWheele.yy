@@ -1,16 +1,13 @@
 {
   "$GMObject":"",
-  "%Name":"Object81",
-  "eventList":[
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-  ],
+  "%Name":"oWheele",
+  "eventList":[],
   "managed":true,
-  "name":"Object81",
+  "name":"oWheele",
   "overriddenProperties":[],
   "parent":{
-    "name":"Actor",
-    "path":"folders/Objets/4-FightingRoom/Actor.yy",
+    "name":"ui",
+    "path":"folders/Objets/4-FightingRoom/ui.yy",
   },
   "parentObjectId":null,
   "persistent":false,
@@ -30,7 +27,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"Sprite129",
+    "path":"sprites/Sprite129/Sprite129.yy",
+  },
   "spriteMaskId":null,
   "visible":true,
 }

@@ -1,6 +1,6 @@
 /// Machine d'état du tour (phase -> phase)
-var delta_time = 1 / room_speed;
-phase_timer += delta_time;
+var dt = 1 / room_speed;
+phase_timer += dt;
 
 // Raccourcis debug : avancer ou mulligan manuel
 if (keyboard_check_pressed(vk_space)) {
