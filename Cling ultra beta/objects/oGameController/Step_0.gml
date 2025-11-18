@@ -1,8 +1,8 @@
 /// Machine d'état du tour (phase -> phase)
-var delta_time = 1 / room_speed;
-phase_timer += delta_time;
+var dt = 1 / room_speed;
+phase_timer += dt;
 var rotation_diff = angle_difference(phase_wheel_target, phase_wheel_rotation);
-phase_wheel_rotation += rotation_diff * clamp(delta_time * 6, 0, 1);
+phase_wheel_rotation += rotation_diff * clamp(dt * 6, 0, 1);
 
 // Raccourcis debug : avancer ou mulligan manuel
 if (keyboard_check_pressed(vk_space)) {
