@@ -13,7 +13,12 @@ starting_hand_size   = 5;
 turn_player_id       = PlayerId.PlayerA;
 turn_count           = 1;
 auto_advance_phases  = true;
-phase_sequence       = [Phase.Draw, Phase.Main, Phase.Attack, Phase.Defense, Phase.Resolution, Phase.End];
+phase_sequence       = [Phase.Draw, Phase.Main, Phase.Attack, Phase.Defense, Phase.Resolution];
+phase_labels         = ["Pioche", "Main", "Attaque", "Défense", "Résolution"];
+phase_wheel_segments = array_length(phase_sequence);
+phase_wheel_angle    = 360 / phase_wheel_segments;
+phase_wheel_rotation = 0;
+phase_wheel_target   = 0;
 current_phase_index  = 0;
 current_phase        = phase_sequence[current_phase_index];
 phase_timer          = 0;
@@ -131,7 +136,6 @@ phase_duration = function (_phase) {
         case Phase.Attack:     return 0.85;
         case Phase.Defense:    return 0.85;
         case Phase.Resolution: return 0.6;
-        case Phase.End:        return 0.45;
     }
     return 0.75;
 };
@@ -139,13 +143,11 @@ phase_duration = function (_phase) {
 enter_phase = function (_phase) {
     current_phase = _phase;
     phase_timer   = 0;
+    phase_wheel_target = current_phase_index * phase_wheel_angle;
 
     switch (_phase) {
         case Phase.Draw:
             draw_cards(get_player(turn_player_id), 1);
-            break;
-        case Phase.End:
-            get_player(turn_player_id).has_played_creature = false;
             break;
     }
 };
