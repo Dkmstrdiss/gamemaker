@@ -17,12 +17,12 @@ function Player_Create(_player_id) {
         // ------------------------------------------------
         // RESSOURCES DE CARTES
         // ------------------------------------------------
-        deck         : [],                   // Tableau d'IDs de cartes (ordonné, top = dernier)
-        hand         : [],                   // Cartes en main
-        extra_deck   : [],                   // Pour fusions / cartes spéciales
+        deck         : ds_list_create(),     // Pile de pioche logique (top = fin de liste)
+        hand         : ds_list_create(),     // Main du joueur (ordre conservé)
+        extra_deck   : ds_list_create(),     // Pour fusions / cartes spéciales
 
-        graveyard    : [],                   // Cimetière
-        banished     : [],                   // Bannies
+        graveyard    : ds_list_create(),     // Cimetière
+        banished     : ds_list_create(),     // Bannies
 
         // ------------------------------------------------
         // PLATEAU LOGIQUE (SLOTS)
@@ -42,7 +42,10 @@ function Player_Create(_player_id) {
         // ------------------------------------------------
         // UTILITAIRES DE TOUR
         // ------------------------------------------------
-        has_played_creature    : false       // Règle : 1 créature max par tour
+        has_played_creature    : false,      // Règle : 1 créature max par tour
+        mulligan_used          : false,      // Indique si le joueur a déjà utilisé son mulligan
+        mulligan_available     : true,       // Fenêtre de mulligan ouverte après la main de départ
+        starting_hand_size     : 0           // Taille de la main de départ réellement piochée
     };
 
     return p;

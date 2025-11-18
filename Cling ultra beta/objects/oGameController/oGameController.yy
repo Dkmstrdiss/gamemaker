@@ -1,13 +1,16 @@
 {
   "$GMObject":"",
   "%Name":"oGameController",
-  "eventList":[],
+  "eventList":[
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+  ],
   "managed":true,
   "name":"oGameController",
   "overriddenProperties":[],
   "parent":{
-    "name":"Actor",
-    "path":"folders/Objets/4-FightingRoom/Actor.yy",
+    "name":"State",
+    "path":"folders/Objets/4-FightingRoom/State.yy",
   },
   "parentObjectId":null,
   "persistent":false,

@@ -83,7 +83,7 @@
     {"name":"oFiltreOff","order":6,"path":"objects/oFiltreOff/oFiltreOff.yy",},
     {"name":"oFramebtn","order":3,"path":"objects/oFramebtn/oFramebtn.yy",},
     {"name":"oFrameSlot","order":12,"path":"objects/oFrameSlot/oFrameSlot.yy",},
-    {"name":"oGameController","order":4,"path":"objects/oGameController/oGameController.yy",},
+    {"name":"oGameController","order":1,"path":"objects/oGameController/oGameController.yy",},
     {"name":"oGlobalEditor","order":8,"path":"objects/oGlobalEditor/oGlobalEditor.yy",},
     {"name":"oHand","order":2,"path":"objects/oHand/oHand.yy",},
     {"name":"oIA","order":1,"path":"objects/oIA/oIA.yy",},
