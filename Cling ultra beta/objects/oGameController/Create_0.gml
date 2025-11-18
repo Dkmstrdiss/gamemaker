@@ -23,6 +23,30 @@ current_phase_index  = 0;
 current_phase        = phase_sequence[current_phase_index];
 phase_timer          = 0;
 
+// Roue de phases (UI)
+phase_wheel_segments = [Phase.Draw, Phase.Main, Phase.Attack, Phase.Defense, Phase.Resolution];
+phase_wheel_step     = 360 / array_length(phase_wheel_segments);
+phase_wheel          = instance_exists(oWheele) ? instance_find(oWheele, 0) : noone;
+
+refresh_phase_wheel = function () {
+    if (!instance_exists(phase_wheel) && instance_exists(oWheele)) {
+        phase_wheel = instance_find(oWheele, 0);
+    }
+    return phase_wheel;
+};
+
+update_phase_wheel = function () {
+    refresh_phase_wheel();
+    if (!instance_exists(oWheele)) return;
+
+    var step_index = array_index_of(phase_wheel_segments, current_phase);
+    if (step_index < 0) step_index = array_length(phase_wheel_segments) - 1;
+
+    with (oWheele) {
+        image_angle = step_index * other.phase_wheel_step;
+    }
+};
+
 // --------------------------------------------------
 // Helpers
 // --------------------------------------------------
@@ -144,6 +168,8 @@ enter_phase = function (_phase) {
     current_phase = _phase;
     phase_timer   = 0;
     phase_wheel_target = current_phase_index * phase_wheel_angle;
+
+    update_phase_wheel();
 
     switch (_phase) {
         case Phase.Draw:
