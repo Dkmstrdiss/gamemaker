@@ -83,7 +83,7 @@ function Lecteur_carte() {
 }
 
 function Lecteur_Slot(Slot_id){
-    var save_dir = "Save data";
+    var save_dir = "datafiles";
 
     if (!directory_exists(save_dir)) {
         directory_create(save_dir);
