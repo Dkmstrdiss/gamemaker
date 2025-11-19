@@ -27,7 +27,7 @@ function sDeckBuilder(_deck_source, _label) {
     }
 
     // Fallback : piocher quelques cartes depuis la base si le deck est vide
-    if (ds_list_size(built) == 0 && is_array(global.card_db)) {
+    if (ds_list_size(built) == 0 && variable_global_exists("card_db") && is_array(global.card_db)) {
         for (var k = 0; k < array_length(global.card_db); ++k) {
             var template = global.card_db[k];
             if (is_struct(template)) {

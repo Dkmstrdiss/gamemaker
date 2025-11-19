@@ -67,6 +67,24 @@ draw_card = function (_player) {
     var card_info = _player.deck[| top_index];
     ds_list_delete(_player.deck, top_index);
     ds_list_add(_player.hand, card_info);
+
+    var card_instance = noone;
+    if (instance_exists(_player.deck_visual)) {
+        card_instance = _player.deck_visual.pick_card_instance();
+    }
+
+    var hand_visual = _player.hand_visual;
+    if (instance_exists(hand_visual)) {
+        if (!instance_exists(card_instance)) {
+            card_instance = hand_visual.create_card_instance(card_info);
+        }
+        if (instance_exists(card_instance)) {
+            hand_visual.addcard(card_instance);
+        }
+    } else if (instance_exists(card_instance)) {
+        instance_destroy(card_instance);
+    }
+
     return card_info;
 };
 
@@ -80,6 +98,9 @@ draw_cards = function (_player, _count) {
 };
 
 setup_starting_hand = function (_player) {
+    if (instance_exists(_player.hand_visual)) {
+        _player.hand_visual.clear_cards();
+    }
     var drawn = draw_cards(_player, starting_hand_size);
     _player.starting_hand_size = drawn;
     _player.mulligan_available = true;
@@ -96,7 +117,15 @@ perform_mulligan = function (_player) {
         ds_list_add(_player.deck, card);
     }
 
+    if (instance_exists(_player.hand_visual)) {
+        _player.hand_visual.clear_cards();
+    }
+
     ds_list_shuffle(_player.deck);
+    if (instance_exists(_player.deck_visual)) {
+        _player.deck_visual.rebuild_from_player_deck();
+    }
+
     var drawn = draw_cards(_player, hand_size);
     _player.mulligan_used = true;
     _player.starting_hand_size = drawn;
@@ -171,6 +200,14 @@ var opps_deck_source   = variable_global_exists("opponent_deck") ? global.oppone
 
 player_a.deck = build_deck_from_source(user_deck_source, "PlayerA");
 player_b.deck = build_deck_from_source(opps_deck_source, "PlayerB");
+
+with (odeck) {
+    register_with_controller(other);
+}
+
+with (oHand) {
+    register_with_controller(other);
+}
 
 setup_starting_hand(player_a);
 setup_starting_hand(player_b);

@@ -32,8 +32,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"cadre_02_01_bck_01",
-    "path":"sprites/cadre_02_01_bck_01/cadre_02_01_bck_01.yy",
+    "name":"CarteBack",
+    "path":"sprites/CarteBack/CarteBack.yy",
   },
   "spriteMaskId":null,
   "visible":false,

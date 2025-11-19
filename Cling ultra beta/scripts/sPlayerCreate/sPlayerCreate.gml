@@ -25,6 +25,12 @@ function Player_Create(_player_id) {
         banished     : ds_list_create(),     // Bannies
 
         // ------------------------------------------------
+        // REFS VISUELLES
+        // ------------------------------------------------
+        deck_visual  : noone,                // Instance odeck associée
+        hand_visual  : noone,                // Instance oHand associée
+
+        // ------------------------------------------------
         // PLATEAU LOGIQUE (SLOTS)
         // ------------------------------------------------
         // On stocke l'ID d'instance de carte ou -1 s’il n’y a rien.
