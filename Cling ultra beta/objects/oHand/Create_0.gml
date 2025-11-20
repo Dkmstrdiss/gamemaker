@@ -1,34 +1,100 @@
 cards = ds_list_create();
-// `player_id` est une variable read-only dans GameMaker, on utilise `owner_id`
-// pour stocker l'ID du joueur propriétaire de cette instance visuelle.
-owner_id = (isThisP1) ? PlayerId.PlayerA : PlayerId.PlayerB;
+player_id = (isThisP1) ? PlayerId.PlayerA : PlayerId.PlayerB;
 controller = noone;
 player_struct = undefined;
 card_layer = "Instances";
 card_scale = 0.2;
-card_back = asset_get_index("Carte_Test");
-if (card_back < 0) card_back = -1;
 
-#region helpers
-get_card_sprite = function (_info) {
-    if (is_struct(_info) && variable_struct_exists(_info, "Carte_id")) {
-        var spr = asset_get_index("Carte_" + string(_info.Carte_id));
-        if (spr != -1) {
-            return spr;
+if (!function_exists(CardSpriteLibrary_Init)) {
+    function CardSpriteLibrary_Init() {
+        if (!variable_global_exists("__card_sprite_cache")) {
+            global.__card_sprite_cache = ds_map_create();
+        }
+        if (!variable_global_exists("__card_sprite_back")) {
+            var back = asset_get_index("CarteBack");
+            if (back < 0) {
+                back = asset_get_index("Carte_Test");
+            }
+            global.__card_sprite_back = back;
         }
     }
-    return card_back;
-};
 
+    function CardSpriteLibrary_GetBackSprite() {
+        CardSpriteLibrary_Init();
+        return global.__card_sprite_back;
+    }
+
+    function CardSpriteLibrary_GetSpriteFromId(_card_id) {
+        CardSpriteLibrary_Init();
+        var cache = global.__card_sprite_cache;
+        if (is_undefined(_card_id)) {
+            return CardSpriteLibrary_GetBackSprite();
+        }
+
+        var key = string(_card_id);
+        if (ds_map_exists(cache, key)) {
+            return cache[? key];
+        }
+
+        var front = asset_get_index("Carte_" + key);
+        if (front == -1) {
+            return CardSpriteLibrary_GetBackSprite();
+        }
+
+        var back = CardSpriteLibrary_GetBackSprite();
+        var composed = -1;
+
+        if (back != -1) {
+            composed = sprite_duplicate(back);
+            if (composed != -1) {
+                sprite_add_from_sprite(composed, front, 0);
+            }
+        } else {
+            composed = sprite_duplicate(front);
+        }
+
+        if (composed == -1) {
+            return front;
+        }
+
+        sprite_set_offset(composed, sprite_get_xoffset(front), sprite_get_yoffset(front));
+        ds_map_add(cache, key, composed);
+        return composed;
+    }
+
+    function CardSpriteLibrary_GetSpriteFromInfo(_info) {
+        if (!is_struct(_info)) {
+            return CardSpriteLibrary_GetBackSprite();
+        }
+        if (!variable_struct_exists(_info, "Carte_id")) {
+            return CardSpriteLibrary_GetBackSprite();
+        }
+        return CardSpriteLibrary_GetSpriteFromId(_info.Carte_id);
+    }
+}
+
+CardSpriteLibrary_Init();
+card_back = CardSpriteLibrary_GetBackSprite();
+
+#region helpers
 create_card_instance = function (_info) {
     var inst = instance_create_layer(0, 0, card_layer, oCardparent);
     inst.card_info = _info;
     inst.isThisP1 = isThisP1;
     inst.zone = "Hand";
 
-    var spr = get_card_sprite(_info);
+    var spr = CardSpriteLibrary_GetSpriteFromInfo(_info);
     if (spr != -1) {
         inst.sprite_index = spr;
+        inst.image_speed = 0;
+        if (sprite_get_number(spr) > 1) {
+            inst.image_index = isThisP1 ? 1 : 0;
+        } else {
+            inst.image_index = 0;
+        }
+    } else {
+        inst.sprite_index = card_back;
+        inst.image_index = 0;
     }
     inst.image_xscale = card_scale;
     inst.image_yscale = card_scale;
@@ -52,8 +118,7 @@ clear_cards = function () {
 register_with_controller = function (_controller) {
     if (!instance_exists(_controller)) return;
     controller = _controller;
-    // On demande la structure joueur au contrôleur en utilisant `owner_id`
-    player_struct = controller.get_player(owner_id);
+    player_struct = controller.get_player(player_id);
     if (!is_struct(player_struct)) return;
     player_struct.hand_visual = id;
 };
@@ -101,7 +166,11 @@ updateDisplay = function () {
         card.x = base_x + offset + i * spacing;
         card.y = base_y + (isThisP1 ? -offset_y : offset_y);
         card.zone = "Hand";
-        card.image_index = !isThisP1;
+        if (sprite_get_number(card.sprite_index) > 1) {
+            card.image_index = isThisP1 ? 1 : 0;
+        } else {
+            card.image_index = 0;
+        }
         card.image_angle = isThisP1 ? -angle_offset : angle_offset;
         card.image_xscale = card_scale;
         card.image_yscale = card_scale;
