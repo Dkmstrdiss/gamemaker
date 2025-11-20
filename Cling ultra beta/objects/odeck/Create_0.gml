@@ -121,11 +121,7 @@ create_card_instance = function (_info, _index) {
 /// Reconstruit l'empilement visuel depuis la liste du deck joueur.
 rebuild_from_player_deck = function () {
     clear_cards();
-    var source_deck = variable_global_exists("main_deck") ? global.main_deck : undefined;
-    if (!ds_exists(source_deck, ds_type_list) && is_struct(player_struct) && ds_exists(player_struct.deck, ds_type_list)) {
-        source_deck = player_struct.deck;
-    }
-
+    var source_deck = is_struct(player_struct) ? player_struct.deck : undefined;
     if (!ds_exists(source_deck, ds_type_list)) return;
 
     var visual_index = 0;

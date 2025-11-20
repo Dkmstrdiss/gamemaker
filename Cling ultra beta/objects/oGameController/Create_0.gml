@@ -67,7 +67,7 @@ build_deck_from_source = function (_deck_source, _label) {
     return sDeckBuilder(_deck_source, _label);
 };
 
-/// Pioche une carte côté modèle (liste) et synchronise les visuels deck/main.
+/// Pioche une carte côté modèle (liste) et renvoie les infos associées.
 draw_card = function (_player) {
     if (!ds_exists(_player.deck, ds_type_list)) return undefined;
     if (ds_list_size(_player.deck) <= 0) return undefined;
@@ -76,25 +76,17 @@ draw_card = function (_player) {
     var card_info = _player.deck[| top_index];
     ds_list_delete(_player.deck, top_index);
     ds_list_add(_player.hand, card_info);
-
-    var card_instance = noone;
-    if (instance_exists(_player.deck_visual)) {
-        card_instance = _player.deck_visual.pick_card_instance();
-    }
-
-    var hand_visual = _player.hand_visual;
-    if (instance_exists(hand_visual)) {
-        if (!instance_exists(card_instance)) {
-            card_instance = hand_visual.create_card_instance(card_info);
-        }
-        if (instance_exists(card_instance)) {
-            hand_visual.addcard(card_instance);
-        }
-    } else if (instance_exists(card_instance)) {
-        instance_destroy(card_instance);
-    }
-
     return card_info;
+};
+
+/// Synchronise les instances visuelles (deck + main) avec les listes modèle.
+refresh_player_zones = function (_player) {
+    if (instance_exists(_player.deck_visual)) {
+        _player.deck_visual.rebuild_from_player_deck();
+    }
+    if (instance_exists(_player.hand_visual)) {
+        _player.hand_visual.rebuild_from_player_hand();
+    }
 };
 
 /// Pioche _count cartes successives.
@@ -104,14 +96,12 @@ draw_cards = function (_player, _count) {
         if (is_undefined(draw_card(_player))) break;
         drawn += 1;
     }
+    refresh_player_zones(_player);
     return drawn;
 };
 
 /// Donne la main de départ et prépare le mulligan pour un joueur.
 setup_starting_hand = function (_player) {
-    if (instance_exists(_player.hand_visual)) {
-        _player.hand_visual.clear_cards();
-    }
     var drawn = draw_cards(_player, starting_hand_size);
     _player.starting_hand_size = drawn;
     _player.mulligan_available = true;
@@ -129,14 +119,8 @@ perform_mulligan = function (_player) {
         ds_list_add(_player.deck, card);
     }
 
-    if (instance_exists(_player.hand_visual)) {
-        _player.hand_visual.clear_cards();
-    }
-
     ds_list_shuffle(_player.deck);
-    if (instance_exists(_player.deck_visual)) {
-        _player.deck_visual.rebuild_from_player_deck();
-    }
+    refresh_player_zones(_player);
 
     var drawn = draw_cards(_player, hand_size);
     _player.mulligan_used = true;

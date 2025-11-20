@@ -126,6 +126,24 @@ clear_cards = function () {
     ds_list_clear(cards);
 };
 
+/// Reconstruit intégralement la main visuelle à partir des données joueur.
+rebuild_from_player_hand = function () {
+    clear_cards();
+
+    if (!is_struct(player_struct)) return;
+    if (!ds_exists(player_struct.hand, ds_type_list)) return;
+
+    for (var i = 0; i < ds_list_size(player_struct.hand); ++i) {
+        var card_info = player_struct.hand[| i];
+        var inst = create_card_instance(card_info);
+        if (instance_exists(inst)) {
+            ds_list_add(cards, inst);
+        }
+    }
+
+    updateDisplay();
+};
+
 /// Mémorise le contrôleur (oGameController) et sa struct joueur associée.
 register_with_controller = function (_controller) {
     if (!instance_exists(_controller)) return;
@@ -133,6 +151,7 @@ register_with_controller = function (_controller) {
     player_struct = controller.get_player(player_id);
     if (!is_struct(player_struct)) return;
     player_struct.hand_visual = id;
+    rebuild_from_player_hand();
 };
 
 /// Ajoute une carte à partir d'une struct d'info (provenant du modèle de jeu).
