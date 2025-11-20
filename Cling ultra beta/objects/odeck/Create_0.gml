@@ -1,4 +1,4 @@
-/// Gestion visuelle d'un deck en combat
+/// Gestion visuelle d'un deck en combat : création, duplication et pioche.
 cards = ds_list_create();
 player_id = (isThisP1) ? PlayerId.PlayerA : PlayerId.PlayerB;
 controller = noone;
@@ -6,7 +6,10 @@ player_struct = undefined;
 card_scale = 0.2;
 card_layer = "Instances";
 
-if (!function_exists(CardSpriteLibrary_Init)) {
+// Bibliothèque de sprites partagée : cache le verso et compose les sprites dos+face.
+// Utilise un nom de fonction en chaîne pour éviter les erreurs de variable non définie
+// lorsque l'évènement est chargé.
+if (!function_exists("CardSpriteLibrary_Init")) {
     function CardSpriteLibrary_Init() {
         if (!variable_global_exists("__card_sprite_cache")) {
             global.__card_sprite_cache = ds_map_create();
@@ -20,11 +23,13 @@ if (!function_exists(CardSpriteLibrary_Init)) {
         }
     }
 
+    /// Renvoie le sprite du dos (initialise le cache si nécessaire).
     function CardSpriteLibrary_GetBackSprite() {
         CardSpriteLibrary_Init();
         return global.__card_sprite_back;
     }
 
+    /// Compose un sprite dos+face à partir de l'identifiant d'une carte.
     function CardSpriteLibrary_GetSpriteFromId(_card_id) {
         CardSpriteLibrary_Init();
         var cache = global.__card_sprite_cache;
@@ -63,6 +68,7 @@ if (!function_exists(CardSpriteLibrary_Init)) {
         return composed;
     }
 
+    /// Raccourci : accepte une struct possédant le champ Carte_id.
     function CardSpriteLibrary_GetSpriteFromInfo(_info) {
         if (!is_struct(_info)) {
             return CardSpriteLibrary_GetBackSprite();
@@ -77,6 +83,7 @@ if (!function_exists(CardSpriteLibrary_Init)) {
 CardSpriteLibrary_Init();
 card_back = CardSpriteLibrary_GetBackSprite();
 
+/// Supprime les instances visuelles du deck et vide la liste interne.
 clear_cards = function () {
     for (var i = ds_list_size(cards) - 1; i >= 0; --i) {
         var inst = cards[| i];
@@ -90,6 +97,7 @@ clear_cards = function () {
     ds_list_clear(cards);
 };
 
+/// Crée une instance de carte face verso pour représenter une pile de deck.
 create_card_instance = function (_info, _index) {
     var offset = _index / 3;
     var inst = instance_create_layer(x + offset, y, card_layer, oCardparent);
@@ -108,6 +116,7 @@ create_card_instance = function (_info, _index) {
     return inst;
 };
 
+/// Reconstruit l'empilement visuel depuis la liste du deck joueur.
 rebuild_from_player_deck = function () {
     clear_cards();
     var source_deck = variable_global_exists("main_deck") ? global.main_deck : undefined;
@@ -131,6 +140,7 @@ rebuild_from_player_deck = function () {
     }
 };
 
+/// Retire visuellement la carte du dessus et la renvoie à la main.
 pick_card_instance = function () {
     if (ds_list_size(cards) <= 0) return noone;
     var top_index = ds_list_size(cards) - 1;
@@ -139,6 +149,7 @@ pick_card_instance = function () {
     return inst;
 };
 
+/// Associe le deck visuel au contrôleur et reconstruit à partir des données modèle.
 register_with_controller = function (_controller) {
     if (!instance_exists(_controller)) return;
     controller = _controller;

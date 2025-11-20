@@ -1,10 +1,12 @@
 /// Machine d'état du tour (phase -> phase)
-var dt = 1 / room_speed;
-phase_timer += dt;
+/// Chaque frame : on avance le timer, anime la roue et gère les raccourcis.
+var dt = 1 / room_speed;                         // Pas de temps fixe (en secondes)
+phase_timer += dt;                               // Temps passé dans la phase courante
 var rotation_diff = angle_difference(phase_wheel_target, phase_wheel_rotation);
-phase_wheel_rotation += rotation_diff * clamp(dt * 6, 0, 1);
+phase_wheel_rotation += rotation_diff * clamp(dt * 6, 0, 1); // Animation lissée de la roue
 
-// Fenêtre de mulligan avant le début de la partie
+// Fenêtre de mulligan avant le début de la partie : bloque le reste de la boucle
+// jusqu'à ce que le joueur valide (Entrée/Espace) ou force un mulligan (M/L).
 if (mulligan_phase_active) {
     if (keyboard_check_pressed(ord("M"))) {
         perform_mulligan(player_a);
