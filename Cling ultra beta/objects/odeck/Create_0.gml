@@ -103,25 +103,31 @@ create_card_instance = function (_info, _index) {
     inst.image_index = 0;
     inst.depth = -_index;
 
-    var spr = CardSpriteLibrary_GetSpriteFromInfo(_info);
-    if (spr != -1) {
-        inst.sprite_index = spr;
-    } else {
-        inst.sprite_index = card_back;
-    }
+    inst.sprite_index = (card_back != -1) ? card_back : CardSpriteLibrary_GetBackSprite();
 
     return inst;
 };
 
 rebuild_from_player_deck = function () {
     clear_cards();
-    if (!is_struct(player_struct)) return;
-    if (!ds_exists(player_struct.deck, ds_type_list)) return;
+    var source_deck = variable_global_exists("main_deck") ? global.main_deck : undefined;
+    if (!ds_exists(source_deck, ds_type_list) && is_struct(player_struct) && ds_exists(player_struct.deck, ds_type_list)) {
+        source_deck = player_struct.deck;
+    }
 
-    for (var i = 0; i < ds_list_size(player_struct.deck); ++i) {
-        var info = player_struct.deck[| i];
-        var inst = create_card_instance(info, i);
-        ds_list_add(cards, inst);
+    if (!ds_exists(source_deck, ds_type_list)) return;
+
+    var visual_index = 0;
+    for (var i = 0; i < ds_list_size(source_deck); ++i) {
+        var entry = source_deck[| i];
+        var card_info = (is_struct(entry) && variable_struct_exists(entry, "Carte_info")) ? entry.Carte_info : entry;
+        var copies = (is_struct(entry) && variable_struct_exists(entry, "Doublon")) ? entry.Doublon : 1;
+
+        repeat (max(1, copies)) {
+            var inst = create_card_instance(card_info, visual_index);
+            ds_list_add(cards, inst);
+            visual_index += 1;
+        }
     }
 };
 

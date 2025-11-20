@@ -5,7 +5,8 @@ player_struct = undefined;
 card_layer = "Instances";
 card_scale = 0.2;
 
-if (!function_exists(CardSpriteLibrary_Init)) {
+// Use string lookup to avoid undefined variable access before the helper exists
+if (!function_exists("CardSpriteLibrary_Init")) {
     function CardSpriteLibrary_Init() {
         if (!variable_global_exists("__card_sprite_cache")) {
             global.__card_sprite_cache = ds_map_create();
@@ -83,19 +84,18 @@ create_card_instance = function (_info) {
     inst.isThisP1 = isThisP1;
     inst.zone = "Hand";
 
-    var spr = CardSpriteLibrary_GetSpriteFromInfo(_info);
-    if (spr != -1) {
-        inst.sprite_index = spr;
-        inst.image_speed = 0;
-        if (sprite_get_number(spr) > 1) {
-            inst.image_index = isThisP1 ? 1 : 0;
-        } else {
-            inst.image_index = 0;
-        }
-    } else {
-        inst.sprite_index = card_back;
-        inst.image_index = 0;
+    var spr = -1;
+    if (is_struct(_info) && variable_struct_exists(_info, "Carte_id")) {
+        spr = asset_get_index("Carte_" + string(_info.Carte_id));
     }
+
+    if (spr == -1) {
+        spr = card_back;
+    }
+
+    inst.sprite_index = spr;
+    inst.image_speed = 0;
+    inst.image_index = 0;
     inst.image_xscale = card_scale;
     inst.image_yscale = card_scale;
 
@@ -166,11 +166,7 @@ updateDisplay = function () {
         card.x = base_x + offset + i * spacing;
         card.y = base_y + (isThisP1 ? -offset_y : offset_y);
         card.zone = "Hand";
-        if (sprite_get_number(card.sprite_index) > 1) {
-            card.image_index = isThisP1 ? 1 : 0;
-        } else {
-            card.image_index = 0;
-        }
+        card.image_index = 0;
         card.image_angle = isThisP1 ? -angle_offset : angle_offset;
         card.image_xscale = card_scale;
         card.image_yscale = card_scale;
