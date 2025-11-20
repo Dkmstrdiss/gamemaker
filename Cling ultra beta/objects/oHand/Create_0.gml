@@ -8,9 +8,11 @@ card_layer = "Instances";
 card_scale = 0.2;
 
 // Bibliothèque de sprites : mise en cache et duplication du verso.
-// On utilise une lookup par chaîne pour éviter l'accès à une variable indéfinie
-// lorsque GameMaker charge l'évènement.
-if (!function_exists("CardSpriteLibrary_Init")) {
+// Utilise un drapeau global pour ne définir les helpers qu'une fois, même si
+// plusieurs mains ou decks sont créés dans la scène.
+if (!variable_global_exists("__card_sprite_library_ready")) {
+    global.__card_sprite_library_ready = true;
+
     function CardSpriteLibrary_Init() {
         if (!variable_global_exists("__card_sprite_cache")) {
             global.__card_sprite_cache = ds_map_create();

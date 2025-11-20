@@ -7,9 +7,11 @@ card_scale = 0.2;
 card_layer = "Instances";
 
 // Bibliothèque de sprites partagée : cache le verso et compose les sprites dos+face.
-// Utilise un nom de fonction en chaîne pour éviter les erreurs de variable non définie
-// lorsque l'évènement est chargé.
-if (!function_exists("CardSpriteLibrary_Init")) {
+// Utilise un drapeau global pour ne définir les helpers qu'une seule fois, même si
+// plusieurs instances de deck ou de main sont créées.
+if (!variable_global_exists("__card_sprite_library_ready")) {
+    global.__card_sprite_library_ready = true;
+
     function CardSpriteLibrary_Init() {
         if (!variable_global_exists("__card_sprite_cache")) {
             global.__card_sprite_cache = ds_map_create();
