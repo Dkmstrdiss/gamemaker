@@ -6,6 +6,7 @@ controller = noone;
 player_struct = undefined;
 card_layer = "Instances";
 card_scale = 0.2;
+card_object = asset_get_index("oCardparent");
 
 // Bibliothèque de sprites : mise en cache et duplication du verso.
 // Utilise un drapeau global pour ne définir les helpers qu'une fois, même si
@@ -89,7 +90,9 @@ card_back = CardSpriteLibrary_GetBackSprite();
 #region helpers
 /// Crée visuellement une carte pour la main (sans la placer).
 create_card_instance = function (_info) {
-    var inst = instance_create_layer(0, 0, card_layer, oCardparent);
+    if (card_object == -1) return noone;
+
+    var inst = instance_create_layer(0, 0, card_layer, card_object);
     inst.card_info = _info;
     inst.isThisP1 = isThisP1;
     inst.zone = "Hand";

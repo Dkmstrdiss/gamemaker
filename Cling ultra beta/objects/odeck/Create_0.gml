@@ -5,6 +5,7 @@ controller = noone;
 player_struct = undefined;
 card_scale = 0.2;
 card_layer = "Instances";
+card_object = asset_get_index("oCardparent");
 
 // Bibliothèque de sprites partagée : cache le verso et compose les sprites dos+face.
 // Utilise un drapeau global pour ne définir les helpers qu'une seule fois, même si
@@ -102,7 +103,9 @@ clear_cards = function () {
 /// Crée une instance de carte face verso pour représenter une pile de deck.
 create_card_instance = function (_info, _index) {
     var offset = _index / 3;
-    var inst = instance_create_layer(x + offset, y, card_layer, oCardparent);
+    if (card_object == -1) return noone;
+
+    var inst = instance_create_layer(x + offset, y, card_layer, card_object);
     inst.card_info = _info;
     inst.isThisP1 = isThisP1;
     inst.zone = "Deck";
@@ -132,8 +135,10 @@ rebuild_from_player_deck = function () {
 
         repeat (max(1, copies)) {
             var inst = create_card_instance(card_info, visual_index);
-            ds_list_add(cards, inst);
-            visual_index += 1;
+            if (instance_exists(inst)) {
+                ds_list_add(cards, inst);
+                visual_index += 1;
+            }
         }
     }
 };
