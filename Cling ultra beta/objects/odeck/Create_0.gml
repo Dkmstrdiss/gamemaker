@@ -1,6 +1,6 @@
 /// Gestion visuelle d'un deck en combat : création, duplication et pioche.
 cards = ds_list_create();
-player_id = (isThisP1) ? PlayerId.PlayerA : PlayerId.PlayerB;
+player_pid = (isThisP1) ? PlayerId.PlayerA : PlayerId.PlayerB;
 controller = noone;
 player_struct = undefined;
 card_scale = 0.2;
@@ -114,7 +114,12 @@ create_card_instance = function (_info, _index) {
     inst.image_yscale = card_scale;
     inst.image_speed = 0;
     inst.image_index = 0;
-    inst.depth = -_index;
+
+    // Use targets so deck can animate stacking; set an initial depth far back
+    inst.target_x = x + offset;
+    inst.target_y = y;
+    inst.target_depth = -_index;
+    inst.depth = -100000 - _index; // start far back until settled
 
     inst.sprite_index = (card_back != -1) ? card_back : CardSpriteLibrary_GetBackSprite();
 
@@ -156,7 +161,7 @@ pick_card_instance = function () {
 register_with_controller = function (_controller) {
     if (!instance_exists(_controller)) return;
     controller = _controller;
-    player_struct = controller.get_player(player_id);
+    player_struct = controller.get_player(player_pid);
     if (!is_struct(player_struct)) return;
 
     player_struct.deck_visual = id;

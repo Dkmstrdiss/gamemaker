@@ -32,8 +32,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"Sprite129",
-    "path":"sprites/Sprite129/Sprite129.yy",
+    "name":"wheele",
+    "path":"sprites/wheele/wheele.yy",
   },
   "spriteMaskId":null,
   "visible":true,

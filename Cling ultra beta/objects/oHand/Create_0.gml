@@ -1,7 +1,7 @@
 /// oHand : gère l'affichage des cartes dans la main d'un joueur.
 /// Chaque helper est commenté pour faciliter la prise en main.
 cards = ds_list_create();
-player_id = (isThisP1) ? PlayerId.PlayerA : PlayerId.PlayerB;
+player_pid = (isThisP1) ? PlayerId.PlayerA : PlayerId.PlayerB;
 controller = noone;
 player_struct = undefined;
 card_layer = "Instances";
@@ -151,7 +151,7 @@ rebuild_from_player_hand = function () {
 register_with_controller = function (_controller) {
     if (!instance_exists(_controller)) return;
     controller = _controller;
-    player_struct = controller.get_player(player_id);
+    player_struct = controller.get_player(player_pid);
     if (!is_struct(player_struct)) return;
     player_struct.hand_visual = id;
     rebuild_from_player_hand();
@@ -199,17 +199,17 @@ updateDisplay = function () {
         var angle_offset = index_centered * ouverture;
         var offset_y = 6 - sqr(index_centered) * 2;
 
-        // Positionnement carte
-        card.x = base_x + offset + i * spacing;
-        card.y = base_y + (isThisP1 ? -offset_y : offset_y);
+        // Positionnement carte (assigner des cibles pour animation)
+        card.target_x = base_x + offset + i * spacing;
+        card.target_y = base_y + (isThisP1 ? -offset_y : offset_y);
         card.zone = "Hand";
         card.image_index = 0;
         card.image_angle = isThisP1 ? -angle_offset : angle_offset;
         card.image_xscale = card_scale;
         card.image_yscale = card_scale;
 
-        // Assure que la carte a une profondeur paire
-        card.depth = -1000 - i * 2;
+        // Assure que la carte a une profondeur paire (cible)
+        card.target_depth = -1000 - i * 2;
 
         // Création et association de l’empreinte si absente
         if (!variable_instance_exists(card, "emprinte") || !instance_exists(card.emprinte)) {
@@ -220,12 +220,13 @@ updateDisplay = function () {
 
         // Mise à jour de l’empreinte
         var emp = card.emprinte;
-        emp.x = card.x;
-        emp.y = card.y;
+        // Place l'empreinte directement sous la cible (pas animée)
+        emp.x = card.target_x;
+        emp.y = card.target_y;
         emp.image_angle = card.image_angle;
         emp.image_xscale = card.image_xscale;
         emp.image_yscale = card.image_yscale;
-        emp.depth = card.depth - 1; // empreinte en dessous
+        emp.depth = card.target_depth - 1; // empreinte en dessous
     }
 }
 #endregion

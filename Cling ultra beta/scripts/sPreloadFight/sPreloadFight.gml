@@ -1,4 +1,11 @@
 function Preload_Fight(_controller) {
+    // Force loading of all card sprites into memory by drawing them off-screen
+    for (var _i = 1; _i <= 56; ++_i) {
+        var _spr = asset_get_index("Carte_" + string(_i));
+        if (_spr != -1) {
+            draw_sprite(_spr, 0, -99999, -99999);
+        }
+    }
     var layer_name = "Instances";
     if (layer_get_id(layer_name) == -1) {
         var existing_layers = layer_get_all();
@@ -14,13 +21,14 @@ function Preload_Fight(_controller) {
         for (var i = 0; i < ds_list_size(_deck); ++i) {
             var entry = _deck[| i];
             var card_info = (is_struct(entry) && variable_struct_exists(entry, "Carte_info")) ? entry.Carte_info : entry;
-            if (!is_struct(card_info)) continue;
+            // Ensure we have a struct with a valid Carte_id before proceeding
+            if (!is_struct(card_info) || !variable_struct_exists(card_info, "Carte_id")) continue;
 
             var copies = (is_struct(entry) && variable_struct_exists(entry, "Doublon")) ? entry.Doublon : 1;
             var sprite_name = "Carte_" + string(card_info.Carte_id);
-            var sprite_index = asset_get_index(sprite_name);
-            if (sprite_index == -1) {
-                sprite_index = asset_get_index("CarteBack");
+            var sprite_idx = asset_get_index(sprite_name);
+            if (sprite_idx == -1) {
+                sprite_idx = asset_get_index("CarteBack");
             }
 
             repeat (max(1, copies)) {
@@ -32,8 +40,8 @@ function Preload_Fight(_controller) {
                 inst.card_id    = card_info.Carte_id;
                 inst.owner_id   = _owner_id;
 
-                if (sprite_index != -1) {
-                    inst.sprite_index = sprite_index;
+                if (sprite_idx != -1) {
+                    inst.sprite_index = sprite_idx;
                     inst.image_index  = 0;
                     inst.image_speed  = 0;
                 }

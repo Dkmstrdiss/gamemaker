@@ -2,14 +2,14 @@
   "$GMObject":"",
   "%Name":"oCarte",
   "eventList":[
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0"}
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
   "name":"oCarte",
   "overriddenProperties":[],
   "parent":{
     "name":"Actor",
-    "path":"folders/Objets/4-FightingRoom/Actor.yy"
+    "path":"folders/Objets/4-FightingRoom/Actor.yy",
   },
   "parentObjectId":null,
   "persistent":false,
@@ -31,5 +31,5 @@
   "solid":false,
   "spriteId":null,
   "spriteMaskId":null,
-  "visible":true
+  "visible":true,
 }
