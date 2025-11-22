@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"sDeckBuilder",
+  "%Name":"sLecteur_Deck",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"sDeckBuilder",
+  "name":"sLecteur_Deck",
   "parent":{
     "name":"Core",
     "path":"folders/Scripts/Fighting Room/Core.yy",
