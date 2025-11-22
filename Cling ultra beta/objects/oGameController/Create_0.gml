@@ -13,30 +13,16 @@ player_b = Player_Create(PlayerId.PlayerB);
 // 2) If a global deck source exists (`main_deck` / `opponent_deck`), use `sDeckLoader` on it.
 // 3) Fallback: call `sDeckLoader` with an empty source so it applies internal fallbacks.
 
-// Player A
-if (variable_global_exists("deck__slot_1")) {
-    player_a.deck = variable_global_get("deck__slot_1");
-} else if (!is_undefined(sDeckLoader) && variable_global_exists("main_deck")) {
-    player_a.deck = sDeckLoader(global.main_deck, "PlayerA");
-} else if (!is_undefined(sDeckLoader)) {
-    player_a.deck = sDeckLoader([], "PlayerA");
-} else {
-    player_a.deck = ds_list_create();
+// If the Lecteur (deck reader) exists, ask it to populate slot globals
+if (!is_undefined(Lecteur_Slot)) {
+    // This will set `deck__slot_1` and `deck__slot_2` globals
+    Lecteur_Slot(1);
+    Lecteur_Slot(2);
 }
 
-// Player B
-if (variable_global_exists("deck__slot_2")) {
-    player_b.deck = variable_global_get("deck__slot_2");
-} else if (!is_undefined(sDeckLoader) && variable_global_exists("opponent_deck")) {
-    player_b.deck = sDeckLoader(global.opponent_deck, "PlayerB");
-} else if (!is_undefined(sDeckLoader) && variable_global_exists("main_deck")) {
-    // fallback to main_deck for opponent if opponent_deck missing
-    player_b.deck = sDeckLoader(global.main_deck, "PlayerB");
-} else if (!is_undefined(sDeckLoader)) {
-    player_b.deck = sDeckLoader([], "PlayerB");
-} else {
-    player_b.deck = ds_list_create();
-}
+// Assign decks from globals if present, otherwise create empty lists
+player_a.deck = variable_global_exists("deck__slot_1") ? variable_global_get("deck__slot_1") : ds_list_create();
+player_b.deck = variable_global_exists("deck__slot_2") ? variable_global_get("deck__slot_2") : ds_list_create();
 
 // Run Preload_Fight to instantiate templates and load sprites
 if (!is_undefined(Preload_Fight)) {
