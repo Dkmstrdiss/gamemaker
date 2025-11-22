@@ -133,6 +133,7 @@
     {"name":"sMain_deck","order":5,"path":"scripts/sMain_deck/sMain_deck.yy",},
     {"name":"sMain_Sort","order":6,"path":"scripts/sMain_Sort/sMain_Sort.yy",},
     {"name":"sPreload","order":4,"path":"scripts/sPreload/sPreload.yy",},
+    {"name":"sPreloadFight","order":5,"path":"scripts/sPreloadFight/sPreloadFight.yy",},
     {"name":"sSearch_filter","order":2,"path":"scripts/sSearch_filter/sSearch_filter.yy",},
     {"name":"sSearch_Sort","order":3,"path":"scripts/sSearch_Sort/sSearch_Sort.yy",},
     {"name":"BackGBtn","order":8,"path":"sprites/BackGBtn/BackGBtn.yy",},

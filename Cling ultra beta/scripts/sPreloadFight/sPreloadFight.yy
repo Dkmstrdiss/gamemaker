@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"sPreloadFight",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"sPreloadFight",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Scripts.yy"
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0"
+}

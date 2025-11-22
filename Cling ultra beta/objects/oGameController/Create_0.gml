@@ -203,6 +203,9 @@ var opps_deck_source   = variable_global_exists("opponent_deck") ? global.oppone
 player_a.deck = build_deck_from_source(user_deck_source, "PlayerA");
 player_b.deck = build_deck_from_source(opps_deck_source, "PlayerB");
 
+// Préchargement : instancie les cartes du combat avec leur template et sprite associé.
+preloaded_cards = Preload_Fight(id);
+
 with (odeck) {
     register_with_controller(other);
 }

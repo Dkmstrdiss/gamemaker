@@ -172,6 +172,7 @@
     {"id":{"name":"sMain_Sort","path":"scripts/sMain_Sort/sMain_Sort.yy",},},
     {"id":{"name":"sPlayerCreate","path":"scripts/sPlayerCreate/sPlayerCreate.yy",},},
     {"id":{"name":"sPreload","path":"scripts/sPreload/sPreload.yy",},},
+    {"id":{"name":"sPreloadFight","path":"scripts/sPreloadFight/sPreloadFight.yy",},},
     {"id":{"name":"sSearch_filter","path":"scripts/sSearch_filter/sSearch_filter.yy",},},
     {"id":{"name":"sSearch_Page","path":"scripts/sSearch_Page/sSearch_Page.yy",},},
     {"id":{"name":"sSearch_Sort","path":"scripts/sSearch_Sort/sSearch_Sort.yy",},},
