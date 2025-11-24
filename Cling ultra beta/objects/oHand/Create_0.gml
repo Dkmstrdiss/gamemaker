@@ -87,33 +87,7 @@ if (!variable_global_exists("__card_sprite_library_ready")) {
 CardSpriteLibrary_Init();
 card_back = CardSpriteLibrary_GetBackSprite();
 
-#region helpers
-/// Crée visuellement une carte pour la main (sans la placer).
-create_card_instance = function (_info) {
-    if (card_object == -1) return noone;
 
-    var inst = instance_create_layer(0, 0, card_layer, card_object);
-    inst.card_info = _info;
-    inst.isThisP1 = isThisP1;
-    inst.zone = "Hand";
-
-    var spr = -1;
-    if (is_struct(_info) && variable_struct_exists(_info, "Carte_id")) {
-        spr = asset_get_index("Carte_" + string(_info.Carte_id));
-    }
-
-    if (spr == -1) {
-        spr = card_back;
-    }
-
-    inst.sprite_index = spr;
-    inst.image_speed = 0;
-    inst.image_index = 0;
-    inst.image_xscale = card_scale;
-    inst.image_yscale = card_scale;
-
-    return inst;
-};
 
 /// Détruit les instances visuelles existantes et purge la liste.
 clear_cards = function () {
@@ -129,52 +103,13 @@ clear_cards = function () {
     ds_list_clear(cards);
 };
 
-/// Reconstruit intégralement la main visuelle à partir des données joueur.
-rebuild_from_player_hand = function () {
-    clear_cards();
 
-    if (!is_struct(player_struct)) return;
-    if (!ds_exists(player_struct.hand, ds_type_list)) return;
 
-    for (var i = 0; i < ds_list_size(player_struct.hand); ++i) {
-        var card_info = player_struct.hand[| i];
-        var inst = create_card_instance(card_info);
-        if (instance_exists(inst)) {
-            ds_list_add(cards, inst);
-        }
-    }
 
-    updateDisplay();
-};
 
-/// Mémorise le contrôleur (oGameController) et sa struct joueur associée.
-register_with_controller = function (_controller) {
-    if (!instance_exists(_controller)) return;
-    controller = _controller;
-    player_struct = controller.get_player(player_pid);
-    if (!is_struct(player_struct)) return;
-    player_struct.hand_visual = id;
-    rebuild_from_player_hand();
-};
 
-/// Ajoute une carte à partir d'une struct d'info (provenant du modèle de jeu).
-add_card_from_info = function (_info) {
-    if (!is_struct(_info)) return;
-    var inst = create_card_instance(_info);
-    if (instance_exists(inst)) {
-        addcard(inst);
-    }
-};
-#endregion
 
-#region function addcard
-/// Ajoute une carte visuelle à la liste et rafraîchit l'éventail.
-addcard = function (card) {
-    if (!instance_exists(card)) return;
-    ds_list_add(cards, card);
-    updateDisplay();
-}
-#endregion
+
 
 #region function updateDisplay
 /// Met à jour la position, l'angle et l'empreinte de chaque carte dans la main.
