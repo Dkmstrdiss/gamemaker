@@ -1,7 +1,8 @@
-function Lecteur_carte() {
+function DataBase() {
     var file_path = "Liste_Carte.csv";
+	
     if (!file_exists(file_path)) {
-        show_debug_message("[Lecteur_carte] Fichier introuvable : " + file_path);
+        show_message("[Lecteur_carte] Fichier introuvable : " + file_path);
         return;
     }
 
@@ -56,8 +57,7 @@ function Lecteur_carte() {
             }
 
             var template = {
-                id           : card_id,
-                card_id      : card_id,
+
                 Carte_id     : card_id,
                 Name         : name,
                 Genre        : type_str,
@@ -79,24 +79,22 @@ function Lecteur_carte() {
 
     file_text_close(file);
 
-    global.Listo = global.card_db;
 }
 
-function Lecteur_Slot(Slot_id){
+function Deck_Slot(Slot_id){
     var save_dir = "datafiles";
 
-    if (!directory_exists(save_dir)) {
-        directory_create(save_dir);
-    }
 
-    var file_name = save_dir + "/save_slot_" + string(Slot_id) + ".txt";
-
+    var file_name = "save_slot_" + string(Slot_id) + ".txt";
+	
     if (file_exists(file_name)) {
+				
         var file = file_text_open_read(file_name);
         var list_deck = ds_list_create();
 
         var deck_name = file_text_readln(file);
         variable_global_set("deck_name_" + string(Slot_id), deck_name);
+
 
         while (!file_text_eof(file)) {
             var line = file_text_readln(file);
@@ -126,18 +124,7 @@ function Lecteur_Slot(Slot_id){
 
         file_text_close(file);
 
-        variable_global_set("deck__slot_" + string(Slot_id), list_deck);
+        variable_global_set("deck_slot_" + string(Slot_id), list_deck);
 
-        if (is_array(global.slot_list) && Slot_id - 1 < array_length(global.slot_list)) {
-            global.slot_list[Slot_id - 1].image_index = 2;
-            global.slot_list[Slot_id - 1].is_used = true;
-        }
-    } else {
-        variable_global_set("deck__slot_" + string(Slot_id), ds_list_create());
-
-        if (is_array(global.slot_list) && Slot_id - 1 < array_length(global.slot_list)) {
-            global.slot_list[Slot_id - 1].image_index = 0;
-            global.slot_list[Slot_id - 1].is_used = false;
-        }
     }
 }

@@ -121,7 +121,7 @@ create_card_instance = function (_info, _index) {
     inst.target_depth = -_index;
     inst.depth = -100000 - _index; // start far back until settled
 
-    inst.sprite_index = (card_back != -1) ? card_back : CardSpriteLibrary_GetBackSprite();
+    
 
     return inst;
 };

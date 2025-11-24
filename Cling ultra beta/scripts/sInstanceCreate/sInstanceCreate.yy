@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"sPreloadFight",
+  "%Name":"sInstanceCreate",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"sPreloadFight",
+  "name":"sInstanceCreate",
   "parent":{
     "name":"Core",
     "path":"folders/Scripts/Fighting Room/Core.yy",

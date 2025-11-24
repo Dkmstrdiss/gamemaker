@@ -165,6 +165,7 @@
     {"id":{"name":"sEnums","path":"scripts/sEnums/sEnums.yy",},},
     {"id":{"name":"sGet_GenreList","path":"scripts/sGet_GenreList/sGet_GenreList.yy",},},
     {"id":{"name":"sInitValue","path":"scripts/sInitValue/sInitValue.yy",},},
+    {"id":{"name":"sInstanceCreate","path":"scripts/sInstanceCreate/sInstanceCreate.yy",},},
     {"id":{"name":"sLecteur_carte","path":"scripts/sLecteur_carte/sLecteur_carte.yy",},},
     {"id":{"name":"sLecteur_Deck","path":"scripts/sLecteur_Deck/sLecteur_Deck.yy",},},
     {"id":{"name":"sMain_deck","path":"scripts/sMain_deck/sMain_deck.yy",},},

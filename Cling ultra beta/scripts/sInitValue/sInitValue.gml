@@ -7,4 +7,5 @@ function Mode_Init() {
     global.BOARD_ATTACK_SLOTS   = 3;
     global.BOARD_DEFENSE_SLOTS  = 3;
     global.BOARD_ACTION_SLOTS   = 3;
+	
 }

@@ -1,4 +1,4 @@
-function sDeckLoader(_deck_source, _label) {
+function DeckLoader(_deck_source, _label) {
     var built = ds_list_create();
 
     var add_card = function (_card_info, _copies) {
