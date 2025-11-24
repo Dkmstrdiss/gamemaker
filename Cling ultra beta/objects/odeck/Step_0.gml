@@ -1,16 +1,20 @@
 
 
-    var count = ds_list_size(player_a.deck);
-    for (var i = 0; i < count; ++i) {
-        var entry = player_a.deck[| i];
-        var cid = -1;
-        if (is_struct(entry) && variable_struct_exists(entry, "Carte_id")) {
-            cid = entry.Carte_id;
-        } else if (is_real(entry) || is_integer(entry) || is_string(entry)) {
-            cid = round(real(entry));
-        }
-        ids_str += (i > 0 ? ", " : "") + string(cid);
+var count = ds_list_size(player_a.deck_visual);
+
+for (var i = 0; i < count; i++)
+{
+    var offset = count / 3;
+
+    with (oCarte)
+    {
+        image_angle = odeck.image_angle;
+        image_index = 1;
+        x = odeck.x + offset;
+        y = odeck.y;
+
+        depth = -100000 + i;
     }
-    show_message("playerA carte_id list: " + ids_str);
+}
 
 

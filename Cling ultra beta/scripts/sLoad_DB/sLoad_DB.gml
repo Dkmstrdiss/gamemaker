@@ -81,50 +81,59 @@ function DataBase() {
 
 }
 
-function Deck_Slot(Slot_id){
-    var save_dir = "datafiles";
+function Deck_Slot(_slot_id) {
+    var save_dir  = "datafiles";
+    var file_name = save_dir + "/save_slot_" + string(_slot_id) + ".txt";
 
+    if (!file_exists(file_name)) {
+        show_debug_message("[Deck_Slot] Fichier introuvable : " + file_name);
+        return;
+    }
 
-    var file_name = "save_slot_" + string(Slot_id) + ".txt";
-	
-    if (file_exists(file_name)) {
-				
-        var file = file_text_open_read(file_name);
-        var list_deck = ds_list_create();
+    var file      = file_text_open_read(file_name);
+    var list_deck = ds_list_create();
 
-        var deck_name = file_text_readln(file);
-        variable_global_set("deck_name_" + string(Slot_id), deck_name);
+    // 1ère ligne : nom du deck
+    var deck_name = file_text_readln(file);
+    variable_global_set("deck_name_" + string(_slot_id), deck_name);
 
+    // Compteur pour numero d'entrée
+    var numero = 0;
 
-        while (!file_text_eof(file)) {
-            var line = file_text_readln(file);
-            var parts = string_split(line, ",");
-            if (array_length(parts) != 2) continue;
+    while (!file_text_eof(file)) {
+        var line = file_text_readln(file);
+        line = string_trim(line);
+        if (line == "") continue;
 
-            var cardid = round(real(string_trim(parts[0])));
-            var qty    = round(real(string_trim(parts[1])));
+        var parts = string_split(line, ",");
+        if (array_length(parts) != 2) continue;
 
-            var template = undefined;
-            if (is_array(global.card_db) && cardid >= 0 && cardid < array_length(global.card_db)) {
-                template = global.card_db[cardid];
-            }
+        var cardid = round(real(string_trim(parts[0])));
+        var qty    = round(real(string_trim(parts[1])));
 
-            if (is_struct(template)) {
-                var entry = {
-                    Carte_id : template.Carte_id,
-                    Genre    : template.Genre,
-                    Doublon  : qty,
-                    Carte_info: template
-                };
-                ds_list_add(list_deck, entry);
-            } else {
-                show_debug_message("[Lecteur_Slot] Carte introuvable (id=" + string(cardid) + ")");
-            }
+        var template = undefined;
+        if (is_array(global.card_db) && cardid >= 0 && cardid < array_length(global.card_db)) {
+            template = global.card_db[cardid];
         }
 
-        file_text_close(file);
-
-        variable_global_set("deck_slot_" + string(Slot_id), list_deck);
-
+        if (is_struct(template)) {
+            // Ajouter `qty` exemplaires séparés dans la liste
+            for (var n = 0; n < qty; ++n) {
+                var entry = {
+                    Carte_id   : template.Carte_id,
+                    Genre      : template.Genre,
+                    Carte_info : template,
+                    numero     : numero    // numéro d'entrée dans le deck
+                };
+                numero++; // incrémente pour la prochaine entrée
+                ds_list_add(list_deck, entry);
+            }
+        } else {
+            show_debug_message("[Deck_Slot] Carte introuvable (id=" + string(cardid) + ")");
+        }
     }
+
+    file_text_close(file);
+
+    variable_global_set("deck_slot_" + string(_slot_id), list_deck);
 }
