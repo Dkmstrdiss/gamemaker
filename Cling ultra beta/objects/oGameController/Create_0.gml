@@ -26,8 +26,8 @@ player_a.deck = variable_global_exists("deck_slot_1") ? variable_global_get("dec
 player_b.deck = variable_global_exists("deck_slot_2") ? variable_global_get("deck_slot_2") : ds_list_create();
 
 
-InstCreate(player_a.deck);
 player_a.deck_visual = InstCreate(player_a.deck);
+
 instance_create_layer(0, 0, "Instances", odeck);
 InstCreate(player_b.deck);
 
