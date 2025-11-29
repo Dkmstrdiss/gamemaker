@@ -4,8 +4,6 @@ var btn_list = [
     inst_RMDeck,
     inst_LSDeck,
     inst_RSDeck,
-    
-
     inst_RSearch,
     inst_LSearch,
 	inst_Return,

@@ -1,11 +1,9 @@
 {
   "$GMObject":"",
-  "%Name":"odeck",
-  "eventList":[
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-  ],
+  "%Name":"oHandb",
+  "eventList":[],
   "managed":true,
-  "name":"odeck",
+  "name":"oHandb",
   "overriddenProperties":[],
   "parent":{
     "name":"Actor",
@@ -31,10 +29,7 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":{
-    "name":"CarteBack",
-    "path":"sprites/CarteBack/CarteBack.yy",
-  },
+  "spriteId":null,
   "spriteMaskId":null,
   "visible":true,
 }

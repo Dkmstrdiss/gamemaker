@@ -1,8 +1,8 @@
 /// Minimal oGameController Create: load decks from save slots and preload fight assets.
-//var target_w = 960;
-//var target_h = 540;
-
-//window_set_size(target_w, target_h);
+var target_w = 960;
+var target_h = 540;
+global.isThisP1 =1 ;
+window_set_size(target_w, target_h);
 // Ensure enums and helpers are available (safe no-op if already initialized).
 Mode_Init();
 //Preload_Fight_C();
@@ -27,9 +27,11 @@ player_b.deck = variable_global_exists("deck_slot_2") ? variable_global_get("dec
 
 
 player_a.deck_visual = InstCreate(player_a.deck);
+player_b.deck_visual = InstCreate(player_b.deck);
+update_visual_deck();
 
-instance_create_layer(0, 0, "Instances", odeck);
-InstCreate(player_b.deck);
+
+
 
 
 

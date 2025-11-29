@@ -56,8 +56,7 @@ function Lecteur_carte() {
             }
 
             var template = {
-                id           : card_id,
-                card_id      : card_id,
+             
                 Carte_id     : card_id,
                 Name         : name,
                 Genre        : type_str,
@@ -83,13 +82,12 @@ function Lecteur_carte() {
 }
 
 function Lecteur_Slot(Slot_id){
-    var save_dir = "datafiles";
+	
 
-    if (!directory_exists(save_dir)) {
-        directory_create(save_dir);
-    }
+	/////
 
-    var file_name = save_dir + "/save_slot_" + string(Slot_id) + ".txt";
+
+    var file_name = "save_slot_" + string(Slot_id) + ".txt";
 
     if (file_exists(file_name)) {
         var file = file_text_open_read(file_name);
@@ -120,7 +118,7 @@ function Lecteur_Slot(Slot_id){
                 };
                 ds_list_add(list_deck, entry);
             } else {
-                show_debug_message("[Lecteur_Slot] Carte introuvable (id=" + string(cardid) + ")");
+                show_message("[Lecteur_Slot] Carte introuvable (id=" + string(cardid) + ")");
             }
         }
 

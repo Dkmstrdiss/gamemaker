@@ -1,16 +1,13 @@
 {
   "$GMObject":"",
-  "%Name":"oGameController",
-  "eventList":[
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":32,"eventType":5,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-  ],
+  "%Name":"odeckb",
+  "eventList":[],
   "managed":true,
-  "name":"oGameController",
+  "name":"odeckb",
   "overriddenProperties":[],
   "parent":{
-    "name":"State",
-    "path":"folders/Objets/4-FightingRoom/State.yy",
+    "name":"Actor",
+    "path":"folders/Objets/4-FightingRoom/Actor.yy",
   },
   "parentObjectId":null,
   "persistent":false,
@@ -26,11 +23,16 @@
   "physicsShape":1,
   "physicsShapePoints":[],
   "physicsStartAwake":true,
-  "properties":[],
+  "properties":[
+    {"$GMObjectProperty":"v2","%Name":"isThisP1","filters":[],"listItems":[],"multiselect":false,"name":"isThisP1","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"False","varType":3,},
+  ],
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"CarteBack",
+    "path":"sprites/CarteBack/CarteBack.yy",
+  },
   "spriteMaskId":null,
-  "visible":true,
+  "visible":false,
 }

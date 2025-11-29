@@ -46,7 +46,7 @@ function InstCreate(_deck) {
         // Optionnel : positionner au centre pour le preload, sinon 0,0
         inst.x = room_width / 2;
         inst.y = room_height / 2;
-
+		inst.zone = Zone.Init;
         ds_list_add(result, inst);
     }
 

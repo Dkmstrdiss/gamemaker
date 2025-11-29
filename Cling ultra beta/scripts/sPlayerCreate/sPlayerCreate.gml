@@ -1,4 +1,4 @@
-/// scr_player_create.gml
+ /// scr_player_create.gml
 /// Crée et initialise la structure d'un joueur Cling.
 /// @param _player_id  (PlayerId.PlayerA / PlayerId.PlayerB)
 ///
@@ -17,8 +17,10 @@ function Player_Create(_player_id) {
         // ------------------------------------------------
         // RESSOURCES DE CARTES
         // ------------------------------------------------
-        deck         : ds_list_create(),     // Pile de pioche logique (top = fin de liste)
-        hand         : ds_list_create(),     // Main du joueur (ordre conservé)
+        deck         : ds_list_create(),
+		deck_visual  : ds_list_create(),// Pile de pioche logique (top = fin de liste)
+        hand         : ds_list_create(),
+		hand_visual  : ds_list_create(),// Main du joueur (ordre conservé)
         extra_deck   : ds_list_create(),     // Pour fusions / cartes spéciales
 
         graveyard    : ds_list_create(),     // Cimetière

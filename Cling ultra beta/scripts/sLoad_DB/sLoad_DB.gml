@@ -70,7 +70,8 @@ function DataBase() {
                 Description  : desc,
                 IsLegendary  : is_leg,
                 IsToken      : is_tok,
-                Doublon      : 0
+                Doublon      : 0,
+				Numero		 : 0
             };
 
             global.card_db[card_id] = template;
@@ -82,11 +83,12 @@ function DataBase() {
 }
 
 function Deck_Slot(_slot_id) {
-    var save_dir  = "datafiles";
-    var file_name = save_dir + "/save_slot_" + string(_slot_id) + ".txt";
+	
+
+    var file_name ="save_slot_" + string(_slot_id) + ".txt";
 
     if (!file_exists(file_name)) {
-        show_debug_message("[Deck_Slot] Fichier introuvable : " + file_name);
+        show_message("[Deck_Slot] Fichier introuvable : " + file_name);
         return;
     }
 
@@ -122,8 +124,8 @@ function Deck_Slot(_slot_id) {
                 var entry = {
                     Carte_id   : template.Carte_id,
                     Genre      : template.Genre,
-                    Carte_info : template,
-                    numero     : numero    // numéro d'entrée dans le deck
+                    Carte_info : template
+                   // Numero     : numero    // numéro d'entrée dans le deck
                 };
                 numero++; // incrémente pour la prochaine entrée
                 ds_list_add(list_deck, entry);

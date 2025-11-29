@@ -32,6 +32,8 @@ enum CardType {
 /// Représente la position actuelle d'une carte dans la partie.
 /// Sert autant à la logique qu'au lien avec l'affichage.
 enum Zone {
+	
+	Init,
     // Zones génériques
     Deck,        // Pile de pioche
     Hand,        // Main du joueur
